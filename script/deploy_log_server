@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export OLD_HOSTS=$HOSTS
+export HOSTS="184.106.193.74"
+cd $FLIGHTLINK/RpmLogServer
+#/opt/ruby-enterprise/bin/cap deploy
+cap deploy
+export HOSTS=$OLD_HOSTS
