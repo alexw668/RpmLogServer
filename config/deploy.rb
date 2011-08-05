@@ -1,16 +1,13 @@
-set :domain, "rpm.hsiflightlink.com"
+set :domain, "184.106.193.74"
 set :application, "RpmLogServer"
 set :repository,  "git@github.com:alexw668/RpmLogServer.git"
 
 set :scm, 'git'
 set( :branch, 'master')
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 # let's use interna IP here for now
-role :web, "10.179.83.95"                          # Your HTTP server, Apache/etc
-role :app, "10.179.83.95"                          # This may be the same as your `Web` server
-#role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-#role :db,  "your slave db-server here"
+role :web, "10.179.83.95"
+role :app, "10.179.83.95"
 
 after "deploy", "deploy:cleanup"
 
@@ -61,7 +58,7 @@ namespace :app do
   task :disable, :roles => :app do
     on_rollback { run "rm #{shared_path}/system/maintenance.html" }
 
-    sudo "[ ! -f #{shared_path}/system/maintenance.html ] && ln -s #{current_path}/public/maintenance/maintenance.html #{shared_path}/system/maintenance.html"
+    sudo "[ ! -f #{shared_path}/system/maintenance.html ] && ln -s #{current_path}/public/maintenance.html #{shared_path}/system/maintenance.html"
   end
 
   task :enable, :roles => :web do
