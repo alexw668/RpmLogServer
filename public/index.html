@@ -28,7 +28,7 @@
 
       #page {
         background-color: #f0f0f0;
-        width: 750px;
+        width: 900px;
         margin: 0;
         margin-left: auto;
         margin-right: auto;
@@ -40,7 +40,7 @@
         border: 3px solid #aaa;
         border-top: none;
         padding: 25px;
-        width: 500px;
+        width: 800px;
       }
 
       #sidebar {
@@ -54,16 +54,16 @@
 
 
       #header, #about, #getting-started {
-        padding-left: 75px;
+        padding-left: 250px;
         padding-right: 30px;
       }
 
 
       #header {
-        background-image: url("images/rails.png");
+        background-image: url("images/FlightLinkLogoFlat.png");
         background-repeat: no-repeat;
         background-position: top left;
-        height: 64px;
+        height: 240px;
       }
       #header h1, #header h2 {margin: 0}
       #header h2 {
@@ -169,67 +169,21 @@
       }
 
     </style>
-    <script type="text/javascript">
-      function about() {
-        info = document.getElementById('about-content');
-        if (window.XMLHttpRequest)
-          { xhr = new XMLHttpRequest(); }
-        else
-          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
-        xhr.open("GET","rails/info/properties",false);
-        xhr.send("");
-        info.innerHTML = xhr.responseText;
-        info.style.display = 'block'
-      }
-    </script>
   </head>
   <body>
     <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
-              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
-              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
 
       <div id="content">
         <div id="header">
-          <h1>Welcome aboard</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
+          <h1>Welcome to HSI Log Server</h1>
         </div>
 
         <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
+          <h3><a href="/event_groups" onclick="about(); return false">You can go straight to browsing the log messages</a></h3>
           <div id="about-content" style="display: none"></div>
         </div>
 
         <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
-
-          <ol>
-            <li>
-              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
-              <p>To see all available options, run it without parameters.</p>
-            </li>
-
-            <li>
-              <h2>Set up a default route and remove or rename this file</h2>
-              <p>Routes are set up in config/routes.rb.</p>
-            </li>
-
-            <li>
-              <h2>Create your database</h2>
-              <p>Run <code>rake db:migrate</code> to create your database. If you're not using SQLite (the default), edit <code>config/database.yml</code> with your username and password.</p>
-            </li>
-          </ol>
         </div>
       </div>
 
