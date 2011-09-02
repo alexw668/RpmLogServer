@@ -25,12 +25,12 @@ namespace :bundler do
     task :create_symlink, :roles => :app do
         shared_dir = File.join(shared_path, 'bundle')
         release_dir = File.join(current_release, '.bundle')
-        run("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
+        sudo("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
     end
 
     task :bundle_new_release, :roles => :app do
         bundler.create_symlink
-        run "cd #{release_path} && bundle install --without development test"
+        sudo "cd #{release_path} && bundle install --without development test"
     end
 end
 
@@ -44,19 +44,19 @@ namespace :deploy do
   end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+    sudo "touch #{File.join(current_path,'tmp','restart.txt')}"
     sudo "chmod 0755 /var/www/RpmLogServer/current/script/rails"
   end
 
  task :install_gems do
-   run "cd #{current_path} && #{sudo} bundle install"
+   sudo "cd #{current_path} && #{sudo} bundle install"
  end
 end
 
 # Swap in the maintenance page
 namespace :app do
   task :disable, :roles => :app do
-    on_rollback { run "rm #{shared_path}/system/maintenance.html" }
+    on_rollback { sudo "rm #{shared_path}/system/maintenance.html" }
 
     sudo "[ ! -f #{shared_path}/system/maintenance.html ] && ln -s #{current_path}/public/maintenance.html #{shared_path}/system/maintenance.html"
   end
