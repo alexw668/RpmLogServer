@@ -4,12 +4,14 @@ set :repository,  "git@github.com:alexw668/RpmLogServer.git"
 
 set :scm, 'git'
 set( :branch, 'master')
+default_run_options[:pty] = true
 
 # let's use interna IP here for now
 role :web, "10.179.83.95"
 role :app, "10.179.83.95"
 
 after "deploy", "deploy:cleanup"
+after "deploy:restart", "deploy:final_touch"
 
 set :deploy_to, "/var/www/#{application}"
 
@@ -25,12 +27,13 @@ namespace :bundler do
     task :create_symlink, :roles => :app do
         shared_dir = File.join(shared_path, 'bundle')
         release_dir = File.join(current_release, '.bundle')
-        sudo("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
+        run("#{sudo :as=>'root'} mkdir -p #{shared_dir}")
+        run("#{sudo :as=>'root'} ln -s #{shared_dir} #{release_dir}")
     end
 
     task :bundle_new_release, :roles => :app do
         bundler.create_symlink
-        sudo "cd #{release_path} && bundle install --without development test"
+        run "cd #{release_path} && #{sudo :as=>'root'} bundle install --without development test"
     end
 end
 
@@ -49,8 +52,12 @@ namespace :deploy do
   end
 
  task :install_gems do
-   sudo "cd #{current_path} && #{sudo} bundle install"
+   run "cd #{current_path} && #{sudo :as=>'root'} bundle install"
  end
+
+ task :final_touch do
+    run "#{sudo} chown -RHh root:root #{current_release}"
+ end 
 end
 
 # Swap in the maintenance page
