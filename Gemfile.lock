@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:alexw668/whoops.git
-  revision: fd67096e2da043581d94d7b4eed22951b8816847
+  revision: 0187199f1c5696e1de0ad66392da6e37bd5f8126
   specs:
     whoops (0.1.10)
       bson_ext

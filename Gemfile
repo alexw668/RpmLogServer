@@ -8,7 +8,9 @@ gem 'rails', '3.0.9'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # use this forked version which depends on rake 0.9.0 (instead of 0.8.7)
+#gem "whoops", :path=>'/home/alex/FlightLink/whoops'
 gem "whoops", :git=>"git@github.com:alexw668/whoops.git"
+
 gem "mongo"
 
 # Use unicorn as the web server

@@ -1,5 +1,6 @@
 defaults: &defaults
   host: localhost
+  autocreate_indexes: true
 
 development:
   <<: *defaults
